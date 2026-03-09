@@ -29,9 +29,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/mascotas/{id}/restore', [MascotaController::class, 'restore']);
 
     // Solicitudes - Usuario
-     Route::post('/solicitudes', [SolicitudController::class, 'store']);
+    Route::post('/solicitudes', [SolicitudController::class, 'store']);
     Route::get('/solicitudes/mis-solicitudes', [SolicitudController::class, 'myIndex']);
     Route::get('/solicitudes/{id}', [SolicitudController::class, 'show']);
+    Route::get('/solicitudes/{id}/historial', [SolicitudController::class, 'historial']);
 
     // Solicitudes - Administrador
     Route::get('/solicitudes', [SolicitudController::class, 'index']);

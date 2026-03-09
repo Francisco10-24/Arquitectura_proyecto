@@ -2,18 +2,21 @@
 
 namespace App\Modules\Solicitudes\UseCases;
 
-use App\Modules\Solicitudes\DTOs\UpdateEstadoSolicitudDTO;
 use App\Modules\Solicitudes\Repositories\SolicitudRepository;
+use App\Modules\Solicitudes\Repositories\HistorialRepository;
+use App\Services\EmailService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
 
 class RechazarSolicitudUseCase
 {
     public function __construct(
-        private SolicitudRepository $solicitudRepository
+        private SolicitudRepository $solicitudRepository,
+        private HistorialRepository $historialRepository,
+        private EmailService $emailService
     ) {}
 
-    public function execute(int $solicitudId, string $motivoRechazo): array
+    public function execute(int $solicitudId, string $motivoRechazo, int $adminId): array
     {
         $solicitud = $this->solicitudRepository->findById($solicitudId);
 
@@ -21,20 +24,34 @@ class RechazarSolicitudUseCase
             throw new ModelNotFoundException('Solicitud no encontrada');
         }
 
-        // Validar que el estado de la solicitud y que sea pendiente o en revisión
+        // Validar que la solicitud esté pendiente o en revisión
         if (!$solicitud->isPendiente() && $solicitud->estado !== 'EN_REVISION') {
             throw ValidationException::withMessages([
                 'estado' => ['Solo se pueden rechazar solicitudes pendientes o en revisión.']
             ]);
         }
 
-        // Rechazar solicitud
+        $estadoAnterior = $solicitud->estado;
+
+        // Cambiar estado a que este rechazada
         $solicitud->update([
             'estado' => 'RECHAZADA',
             'motivo_rechazo' => $motivoRechazo
         ]);
 
-        // Marcar mascota como disponible si no tiene mas solicitudes activas
+        // Registrar en historial
+        $this->historialRepository->registrarCambio(
+            solicitudId: $solicitud->id,
+            estadoAnterior: $estadoAnterior,
+            estadoActual: 'RECHAZADA',
+            cambiadoPor: $adminId,
+            comentario: "Rechazada: {$motivoRechazo}"
+        );
+
+        // Enviar notificación de rechazo
+        $this->emailService->enviarSolicitudRechazada($solicitud);
+
+        // Si no hay más solicitudes activas, marcar mascota como disponible
         $solicitudesActivas = $solicitud->mascota->solicitudes()
             ->whereIn('estado', ['PENDIENTE', 'EN_REVISION'])
             ->count();

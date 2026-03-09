@@ -11,6 +11,7 @@ use App\Modules\Solicitudes\UseCases\GetSolicitudUseCase;
 use App\Modules\Solicitudes\UseCases\ListAllSolicitudesUseCase;
 use App\Modules\Solicitudes\UseCases\ListMySolicitudesUseCase;
 use App\Modules\Solicitudes\UseCases\RechazarSolicitudUseCase;
+use App\Modules\Solicitudes\UseCases\GetHistorialSolicitudUseCase;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
@@ -27,7 +28,8 @@ class SolicitudController extends Controller
         private ListAllSolicitudesUseCase $listAllSolicitudesUseCase,
         private GetSolicitudUseCase $getSolicitudUseCase,
         private AprobarSolicitudUseCase $aprobarSolicitudUseCase,
-        private RechazarSolicitudUseCase $rechazarSolicitudUseCase
+        private RechazarSolicitudUseCase $rechazarSolicitudUseCase,
+        private GetHistorialSolicitudUseCase $getHistorialSolicitudUseCase
     ) {}
 
     /**
@@ -50,7 +52,6 @@ class SolicitudController extends Controller
                 'message' => 'Solicitud de adopción creada exitosamente',
                 'data' => $result
             ], 201);
-
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Error de validación',
@@ -73,7 +74,6 @@ class SolicitudController extends Controller
             $result = $this->listMySolicitudesUseCase->execute($request->user()->id);
 
             return response()->json($result, 200);
-
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Error al listar solicitudes',
@@ -97,7 +97,6 @@ class SolicitudController extends Controller
             $result = $this->listAllSolicitudesUseCase->execute($validated['estado'] ?? null);
 
             return response()->json($result, 200);
-
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             return response()->json([
                 'message' => 'No autorizado.'
@@ -124,7 +123,6 @@ class SolicitudController extends Controller
             return response()->json([
                 'data' => $result
             ], 200);
-
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             return response()->json([
                 'message' => 'No autorizado para ver esta solicitud.'
@@ -144,18 +142,17 @@ class SolicitudController extends Controller
     /**
      * Aprobar solicitud
      */
-    public function aprobar(int $id): JsonResponse
+    public function aprobar(Request $request, int $id): JsonResponse
     {
         try {
             $this->authorize('updateEstado', SolicitudAdopcion::class);
 
-            $result = $this->aprobarSolicitudUseCase->execute($id);
+            $result = $this->aprobarSolicitudUseCase->execute($id, $request->user()->id);  // ← Agregar user()->id
 
             return response()->json([
                 'message' => 'Solicitud aprobada exitosamente',
                 'data' => $result
             ], 200);
-
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             return response()->json([
                 'message' => 'No autorizado.'
@@ -189,13 +186,16 @@ class SolicitudController extends Controller
                 'motivo_rechazo' => 'required|string|max:1000',
             ]);
 
-            $result = $this->rechazarSolicitudUseCase->execute($id, $validated['motivo_rechazo']);
+            $result = $this->rechazarSolicitudUseCase->execute(
+                $id,
+                $validated['motivo_rechazo'],
+                $request->user()->id  // ← Agregar user()->id
+            );
 
             return response()->json([
                 'message' => 'Solicitud rechazada',
                 'data' => $result
             ], 200);
-
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             return response()->json([
                 'message' => 'No autorizado.'
@@ -212,6 +212,34 @@ class SolicitudController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Error al rechazar solicitud',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Ver historial de cambios de estado
+     */
+    public function historial(int $id): JsonResponse
+    {
+        try {
+            $solicitud = SolicitudAdopcion::findOrFail($id);
+            $this->authorize('view', $solicitud);
+
+            $result = $this->getHistorialSolicitudUseCase->execute($id);
+
+            return response()->json($result, 200);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return response()->json([
+                'message' => 'No autorizado para ver el historial de esta solicitud.'
+            ], 403);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => 'Solicitud no encontrada'
+            ], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error al obtener historial',
                 'error' => $e->getMessage()
             ], 500);
         }
