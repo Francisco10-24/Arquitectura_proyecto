@@ -3877,6 +3877,83 @@
             "install-path": "../pestphp/pest-plugin-arch"
         },
         {
+            "name": "pestphp/pest-plugin-laravel",
+            "version": "v3.2.0",
+            "version_normalized": "3.2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pestphp/pest-plugin-laravel.git",
+                "reference": "6801be82fd92b96e82dd72e563e5674b1ce365fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-laravel/zipball/6801be82fd92b96e82dd72e563e5674b1ce365fc",
+                "reference": "6801be82fd92b96e82dd72e563e5674b1ce365fc",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11.39.1|^12.9.2",
+                "pestphp/pest": "^3.8.2",
+                "php": "^8.2.0"
+            },
+            "require-dev": {
+                "laravel/dusk": "^8.2.13|dev-develop",
+                "orchestra/testbench": "^9.9.0|^10.2.1",
+                "pestphp/pest-dev-tools": "^3.4.0"
+            },
+            "time": "2025-04-21T07:40:53+00:00",
+            "type": "library",
+            "extra": {
+                "pest": {
+                    "plugins": [
+                        "Pest\\Laravel\\Plugin"
+                    ]
+                },
+                "laravel": {
+                    "providers": [
+                        "Pest\\Laravel\\PestServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/Autoload.php"
+                ],
+                "psr-4": {
+                    "Pest\\Laravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "The Pest Laravel Plugin",
+            "keywords": [
+                "framework",
+                "laravel",
+                "pest",
+                "php",
+                "test",
+                "testing",
+                "unit"
+            ],
+            "support": {
+                "source": "https://github.com/pestphp/pest-plugin-laravel/tree/v3.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.com/paypalme/enunomaduro",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/nunomaduro",
+                    "type": "github"
+                }
+            ],
+            "install-path": "../pestphp/pest-plugin-laravel"
+        },
+        {
             "name": "pestphp/pest-plugin-mutate",
             "version": "v3.0.5",
             "version_normalized": "3.0.5.0",
@@ -9754,6 +9831,7 @@
         "pestphp/pest",
         "pestphp/pest-plugin",
         "pestphp/pest-plugin-arch",
+        "pestphp/pest-plugin-laravel",
         "pestphp/pest-plugin-mutate",
         "phar-io/manifest",
         "phar-io/version",

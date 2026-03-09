@@ -57,6 +57,7 @@ return array(
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'Pest\\Plugin\\' => array($vendorDir . '/pestphp/pest-plugin/src'),
     'Pest\\Mutate\\' => array($vendorDir . '/pestphp/pest-plugin-mutate/src'),
+    'Pest\\Laravel\\' => array($vendorDir . '/pestphp/pest-plugin-laravel/src'),
     'Pest\\Arch\\' => array($vendorDir . '/pestphp/pest-plugin-arch/src'),
     'Pest\\' => array($vendorDir . '/pestphp/pest/src'),
     'ParaTest\\' => array($vendorDir . '/brianium/paratest/src'),

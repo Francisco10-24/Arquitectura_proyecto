@@ -28,7 +28,6 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
         '47e1160838b5e5a10346ac4084b58c23' => __DIR__ . '/..' . '/laravel/prompts/src/helpers.php',
         'a1cfe24d14977df6878b9bf804af2d1c' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Phpunit/Autoload.php',
         'aadac1114cab8dc19489a7f6dc24c003' => __DIR__ . '/..' . '/pestphp/pest-plugin-arch/src/Autoload.php',
-        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         '662a729f963d39afe703c9d9b7ab4a8c' => __DIR__ . '/..' . '/symfony/polyfill-php83/bootstrap.php',
         '9d2b9fc6db0f153a0a149fefb182415e' => __DIR__ . '/..' . '/symfony/polyfill-php84/bootstrap.php',
@@ -41,10 +40,12 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
         '91892b814db86b8442ad76273bb7aec5' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Reflection/helpers.php',
         '493c6aea52f6009bab023b26c21a386a' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/functions.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
-        'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
-        'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'f83ed111c2f97a0449abf067f157f418' => __DIR__ . '/..' . '/pestphp/pest/src/Functions.php',
         '7d2876738dc0328edeb8a103c76cd8e7' => __DIR__ . '/..' . '/pestphp/pest/src/Pest.php',
+        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
+        'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
+        'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
+        'd634523d799d97a8ab4807b650bf5cea' => __DIR__ . '/..' . '/pestphp/pest-plugin-laravel/src/Autoload.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -119,6 +120,7 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
             'PhpOption\\' => 10,
             'Pest\\Plugin\\' => 12,
             'Pest\\Mutate\\' => 12,
+            'Pest\\Laravel\\' => 13,
             'Pest\\Arch\\' => 10,
             'Pest\\' => 5,
             'ParaTest\\' => 9,
@@ -415,6 +417,10 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
         'Pest\\Mutate\\' =>
         array (
             0 => __DIR__ . '/..' . '/pestphp/pest-plugin-mutate/src',
+        ),
+        'Pest\\Laravel\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/pestphp/pest-plugin-laravel/src',
         ),
         'Pest\\Arch\\' =>
         array (
@@ -5210,6 +5216,11 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
         'Pest\\Factories\\TestCaseMethodFactory' => __DIR__ . '/..' . '/pestphp/pest/src/Factories/TestCaseMethodFactory.php',
         'Pest\\Kernel' => __DIR__ . '/..' . '/pestphp/pest/src/Kernel.php',
         'Pest\\KernelDump' => __DIR__ . '/..' . '/pestphp/pest/src/KernelDump.php',
+        'Pest\\Laravel\\Commands\\PestDatasetCommand' => __DIR__ . '/..' . '/pestphp/pest-plugin-laravel/src/Commands/PestDatasetCommand.php',
+        'Pest\\Laravel\\Commands\\PestDuskCommand' => __DIR__ . '/..' . '/pestphp/pest-plugin-laravel/src/Commands/PestDuskCommand.php',
+        'Pest\\Laravel\\Commands\\PestTestCommand' => __DIR__ . '/..' . '/pestphp/pest-plugin-laravel/src/Commands/PestTestCommand.php',
+        'Pest\\Laravel\\PestServiceProvider' => __DIR__ . '/..' . '/pestphp/pest-plugin-laravel/src/PestServiceProvider.php',
+        'Pest\\Laravel\\Plugin' => __DIR__ . '/..' . '/pestphp/pest-plugin-laravel/src/Plugin.php',
         'Pest\\Logging\\Converter' => __DIR__ . '/..' . '/pestphp/pest/src/Logging/Converter.php',
         'Pest\\Logging\\TeamCity\\ServiceMessage' => __DIR__ . '/..' . '/pestphp/pest/src/Logging/TeamCity/ServiceMessage.php',
         'Pest\\Logging\\TeamCity\\Subscriber\\Subscriber' => __DIR__ . '/..' . '/pestphp/pest/src/Logging/TeamCity/Subscriber/Subscriber.php',
