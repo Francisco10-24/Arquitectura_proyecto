@@ -37,7 +37,6 @@ class AuthController extends Controller
                 'message' => 'Usuario registrado exitosamente',
                 'data' => $result
             ], 201);
-
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Error de validación',
@@ -66,7 +65,6 @@ class AuthController extends Controller
                 'message' => 'Inicio de sesión exitoso',
                 'data' => $result
             ], 200);
-
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Credenciales incorrectas',
@@ -82,11 +80,13 @@ class AuthController extends Controller
 
     public function logout(Request $request): JsonResponse
     {
-        $request->user()->currentAccessToken()->delete();
+        if ($request->user()->currentAccessToken()) {
+            $request->user()->currentAccessToken()->delete();
+        }
 
         return response()->json([
             'message' => 'Sesión cerrada exitosamente'
-        ], 200);
+        ]);
     }
 
     public function me(Request $request): JsonResponse
