@@ -20,7 +20,7 @@ use App\Policies\MascotaPolicy;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Modules\Mascotas\UseCases\RestoreMascotaUseCase;
 use App\Modules\Mascotas\UseCases\ListTrashedMascotasUseCase;
-
+use Illuminate\Support\Facades\Storage;
 
 class MascotaController extends Controller
 {
@@ -32,7 +32,7 @@ class MascotaController extends Controller
         private CreateMascotaUseCase $createMascotaUseCase,
         private UpdateMascotaUseCase $updateMascotaUseCase,
         private DeleteMascotaUseCase $deleteMascotaUseCase,
-        private RestoreMascotaUseCase $restoreMascotaUseCase,         
+        private RestoreMascotaUseCase $restoreMascotaUseCase,
         private ListTrashedMascotasUseCase $listTrashedMascotasUseCase
     ) {}
 
@@ -97,7 +97,6 @@ class MascotaController extends Controller
     public function store(Request $request): JsonResponse
     {
         try {
-
             $this->authorize('create', Mascota::class);
 
             $validated = $request->validate([
@@ -107,9 +106,14 @@ class MascotaController extends Controller
                 'edad_aproximada' => 'nullable|integer|min:0',
                 'sexo' => 'nullable|in:MACHO,HEMBRA',
                 'descripcion' => 'nullable|string',
-                'foto_url' => 'nullable|url|max:500',
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
                 'estado' => 'nullable|in:DISPONIBLE,EN_PROCESO,ADOPTADA,INACTIVA',
             ]);
+            
+            if ($request->hasFile('foto')) {
+                $path = $request->file('foto')->store('mascotas', 'public');
+                $validated['foto_url'] = Storage::url($path);
+            }
 
             $dto = CreateMascotaDTO::fromRequest($validated);
             $result = $this->createMascotaUseCase->execute($dto);
@@ -147,14 +151,24 @@ class MascotaController extends Controller
             $validated = $request->validate([
                 'nombre' => 'sometimes|string|max:255',
                 'especie' => 'sometimes|in:PERRO,GATO,OTRO',
-                'raza' => 'nullable|string|max:255',                    
-                'edad_aproximada' => 'nullable|integer|min:0',          
-                'sexo' => 'nullable|in:MACHO,HEMBRA',                   
-                'descripcion' => 'nullable|string',                     
-                'foto_url' => 'nullable|url|max:500',                   
+                'raza' => 'nullable|string|max:255',
+                'edad_aproximada' => 'nullable|integer|min:0',
+                'sexo' => 'nullable|in:MACHO,HEMBRA',
+                'descripcion' => 'nullable|string',
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
                 'estado' => 'sometimes|in:DISPONIBLE,EN_PROCESO,ADOPTADA,INACTIVA',
-
             ]);
+
+            if ($request->hasFile('foto')) {
+
+                if ($mascota->foto_url) {
+                    $oldPath = str_replace('/storage', 'public', $mascota->foto_url);
+                    Storage::delete($oldPath);
+                }
+
+                $path = $request->file('foto')->store('mascotas', 'public');
+                $validated['foto_url'] = Storage::url($path);
+            }
 
             $dto = UpdateMascotaDTO::fromRequest($validated);
             $result = $this->updateMascotaUseCase->execute($id, $dto);
@@ -193,6 +207,13 @@ class MascotaController extends Controller
             $mascota = Mascota::findOrFail($id);
             $this->authorize('delete', $mascota);
 
+            if ($mascota->foto_url) {
+                $path = str_replace('/storage/', '', $mascota->foto_url);
+                if (Storage::disk('public')->exists($path)) {
+                    Storage::disk('public')->delete($path);
+                }
+            }
+
             $this->deleteMascotaUseCase->execute($id);
 
             return response()->json([
@@ -214,7 +235,7 @@ class MascotaController extends Controller
         }
     }
 
-     /**
+    /**
      * Listar mascotas eliminadas
      */
     public function trashed(): JsonResponse
@@ -225,7 +246,6 @@ class MascotaController extends Controller
             $result = $this->listTrashedMascotasUseCase->execute();
 
             return response()->json($result, 200);
-
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             return response()->json([
                 'message' => 'No autorizado.'
@@ -252,7 +272,6 @@ class MascotaController extends Controller
                 'message' => 'Mascota restaurada exitosamente',
                 'data' => $result
             ], 200);
-
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             return response()->json([
                 'message' => 'No autorizado.'

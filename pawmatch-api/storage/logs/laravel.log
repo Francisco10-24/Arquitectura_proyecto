@@ -2900,3 +2900,41 @@ Did you mean one of these?
 #38 C:/Program Files/Herd/resources/app.asar.unpacked/resources/valet/server.php(139): require('C://Users//Laptop...')
 #39 {main}
 "} 
+[2026-03-11 16:25:16] local.ERROR: Command "scramble:generate" is not defined.
+
+Did you mean one of these?
+    key:generate
+    scramble:analyze
+    scramble:export {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"scramble:generate\" is not defined.
+
+Did you mean one of these?
+    key:generate
+    scramble:analyze
+    scramble:export at C:/Users/Laptop1/OneDrive/Desktop/Arquitectura_proyecto/pawmatch-api/vendor/symfony/console/Application.php:759)
+[stacktrace]
+#0 C:/Users/Laptop1/OneDrive/Desktop/Arquitectura_proyecto/pawmatch-api/vendor/symfony/console/Application.php(298): Symfony/Component/Console/Application->find('scramble:genera...')
+#1 C:/Users/Laptop1/OneDrive/Desktop/Arquitectura_proyecto/pawmatch-api/vendor/symfony/console/Application.php(195): Symfony/Component/Console/Application->doRun(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#2 C:/Users/Laptop1/OneDrive/Desktop/Arquitectura_proyecto/pawmatch-api/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(198): Symfony/Component/Console/Application->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#3 C:/Users/Laptop1/OneDrive/Desktop/Arquitectura_proyecto/pawmatch-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#4 C:/Users/Laptop1/OneDrive/Desktop/Arquitectura_proyecto/pawmatch-api/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#5 {main}
+"} 
+[2026-03-11 16:25:43] local.ERROR: Command "scramble:generate" is not defined.
+
+Did you mean one of these?
+    key:generate
+    scramble:analyze
+    scramble:export {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"scramble:generate\" is not defined.
+
+Did you mean one of these?
+    key:generate
+    scramble:analyze
+    scramble:export at C:/Users/Laptop1/OneDrive/Desktop/Arquitectura_proyecto/pawmatch-api/vendor/symfony/console/Application.php:759)
+[stacktrace]
+#0 C:/Users/Laptop1/OneDrive/Desktop/Arquitectura_proyecto/pawmatch-api/vendor/symfony/console/Application.php(298): Symfony/Component/Console/Application->find('scramble:genera...')
+#1 C:/Users/Laptop1/OneDrive/Desktop/Arquitectura_proyecto/pawmatch-api/vendor/symfony/console/Application.php(195): Symfony/Component/Console/Application->doRun(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#2 C:/Users/Laptop1/OneDrive/Desktop/Arquitectura_proyecto/pawmatch-api/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(198): Symfony/Component/Console/Application->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#3 C:/Users/Laptop1/OneDrive/Desktop/Arquitectura_proyecto/pawmatch-api/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#4 C:/Users/Laptop1/OneDrive/Desktop/Arquitectura_proyecto/pawmatch-api/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#5 {main}
+"} 

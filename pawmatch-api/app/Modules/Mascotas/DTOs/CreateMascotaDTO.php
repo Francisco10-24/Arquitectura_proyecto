@@ -24,7 +24,7 @@ class CreateMascotaDTO
             edad_aproximada: isset($data['edad_aproximada']) ? (int) $data['edad_aproximada'] : null,
             sexo: $data['sexo'] ?? null,
             descripcion: $data['descripcion'] ?? null,
-            foto_url: $data['foto_url'] ?? null,
+            foto_url: $data['foto_url'] ?? null,  
             estado: $data['estado'] ?? 'DISPONIBLE'
         );
     }
