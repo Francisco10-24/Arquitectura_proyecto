@@ -13,8 +13,10 @@ class ListMascotasUseCase
 
     public function execute(FilterMascotasDTO $filters): array
     {
+        // Listar mascotas
         $mascotas = $this->mascotaRepository->list($filters);
 
+        // Retornar los resultados que se encontraron
         return [
             'data' => $mascotas->items(),
             'pagination' => [

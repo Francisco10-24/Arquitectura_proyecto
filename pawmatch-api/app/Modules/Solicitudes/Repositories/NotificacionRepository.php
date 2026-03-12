@@ -6,6 +6,7 @@ use App\Models\NotificacionCorreo;
 
 class NotificacionRepository
 {
+    // Crear una notificación de correo electrónico
     public function registrarEnvio(
         string $tipo,
         string $destinatarioEmail,
@@ -23,6 +24,7 @@ class NotificacionRepository
         ]);
     }
 
+    // Función para actualizar el estado de una notificación de correo electrónico
     public function marcarComoEnviada(int $notificacionId): void
     {
         NotificacionCorreo::where('id', $notificacionId)->update([
@@ -31,6 +33,7 @@ class NotificacionRepository
         ]);
     }
 
+    // Función para marcar un error en la notificación de correo electrónico
     public function marcarComoFallida(int $notificacionId, string $mensajeError): void
     {
         NotificacionCorreo::where('id', $notificacionId)->update([

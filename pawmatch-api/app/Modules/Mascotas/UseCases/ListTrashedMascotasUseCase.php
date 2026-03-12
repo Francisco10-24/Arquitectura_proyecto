@@ -12,8 +12,10 @@ class ListTrashedMascotasUseCase
 
     public function execute(): array
     {
+        //Obtener mascotas eliminadas
         $mascotas = $this->mascotaRepository->getTrashed();
 
+        // Retornar los resultados que se encontraron
         return [
             'data' => $mascotas->items(),
             'pagination' => [

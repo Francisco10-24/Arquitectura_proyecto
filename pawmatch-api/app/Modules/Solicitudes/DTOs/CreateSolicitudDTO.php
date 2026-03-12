@@ -4,6 +4,7 @@ namespace App\Modules\Solicitudes\DTOs;
 
 class CreateSolicitudDTO
 {
+    // Constructor de la clase
     public function __construct(
         public readonly int $user_id,
         public readonly int $mascota_id,
@@ -11,6 +12,7 @@ class CreateSolicitudDTO
         public readonly string $estado = 'PENDIENTE'
     ) {}
 
+    // Form request para crear una nueva solicitud
     public static function fromRequest(array $data, int $userId): self
     {
         return new self(
@@ -21,6 +23,7 @@ class CreateSolicitudDTO
         );
     }
 
+    // Devolver los datos en un array
     public function toArray(): array
     {
         return [

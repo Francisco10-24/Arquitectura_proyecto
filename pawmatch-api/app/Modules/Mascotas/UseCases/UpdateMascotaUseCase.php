@@ -14,14 +14,18 @@ class UpdateMascotaUseCase
 
     public function execute(int $id, UpdateMascotaDTO $dto): array
     {
+        // Obtener la mascota que se busca
         $mascota = $this->mascotaRepository->findById($id);
 
         if (!$mascota) {
             throw new ModelNotFoundException('Mascota no encontrada');
         }
 
+        //Llamar al método update de la clase MascotaRepository
+
         $mascota = $this->mascotaRepository->update($mascota, $dto);
 
+        // Devolver el resultado
         return [
             'id' => $mascota->id,
             'nombre' => $mascota->nombre,

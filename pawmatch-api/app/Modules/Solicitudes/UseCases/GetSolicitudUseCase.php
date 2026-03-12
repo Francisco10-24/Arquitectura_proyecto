@@ -13,12 +13,14 @@ class GetSolicitudUseCase
 
     public function execute(int $id): array
     {
+        // Verificar que la solicitud existe
         $solicitud = $this->solicitudRepository->findById($id);
 
         if (!$solicitud) {
             throw new ModelNotFoundException('Solicitud no encontrada');
         }
 
+        // Si la existe, retornar los datos 
         return [
             'id' => $solicitud->id,
             'estado' => $solicitud->estado,

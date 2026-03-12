@@ -18,6 +18,7 @@ class EmailService
 
     public function enviarSolicitudCreada(SolicitudAdopcion $solicitud): void
     {
+        // Registrar notificación de correo electrónico
         $notificacion = $this->notificacionRepository->registrarEnvio(
             tipo: 'solicitud_creada',
             destinatarioEmail: $solicitud->user->email,
@@ -26,6 +27,7 @@ class EmailService
         );
 
         try {
+            // Enviar correo electrónico
             Mail::to($solicitud->user->email)
                 ->send(new SolicitudCreadaMail($solicitud));
 

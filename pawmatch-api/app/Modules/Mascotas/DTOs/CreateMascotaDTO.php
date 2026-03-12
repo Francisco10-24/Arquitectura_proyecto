@@ -4,6 +4,7 @@ namespace App\Modules\Mascotas\DTOs;
 
 class CreateMascotaDTO
 {
+    // Constructor con los datos requeridos para crear una mascota
     public function __construct(
         public readonly string $nombre,
         public readonly string $especie,
@@ -15,6 +16,7 @@ class CreateMascotaDTO
         public readonly string $estado = 'DISPONIBLE'
     ) {}
 
+    // Crear un form request a partir de los datos del DTO
     public static function fromRequest(array $data): self
     {
         return new self(
@@ -28,7 +30,7 @@ class CreateMascotaDTO
             estado: $data['estado'] ?? 'DISPONIBLE'
         );
     }
-
+    // Crear un array a partir de los datos del DTO
     public function toArray(): array
     {
         return [

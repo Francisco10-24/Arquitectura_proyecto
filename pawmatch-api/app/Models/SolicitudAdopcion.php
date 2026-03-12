@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SolicitudAdopcion extends Model
 {
     use HasFactory, SoftDeletes;
+    // Instancia
 
     protected $table = 'solicitudes_adopcion';
 
+    // Atributos de la tabla
     protected $fillable = [
         'user_id',
         'mascota_id',
@@ -25,6 +27,8 @@ class SolicitudAdopcion extends Model
         'updated_at' => 'datetime',
     ];
 
+    // Relaciones
+
      public function user()
     {
         return $this->belongsTo(User::class);
@@ -37,7 +41,7 @@ class SolicitudAdopcion extends Model
 
     public function historial()
     {
-        //return $this->hasMany(HistorialEstadoSolicitud::class, 'solicitud_id');
+        return $this->hasMany(HistorialEstadoSolicitud::class, 'solicitud_id');
     }
 
     public function isPendiente(): bool

@@ -4,6 +4,7 @@ namespace App\Modules\Auth\DTOs;
 
 class RegisterUserDTO
 {
+    // Constructor con atributos
     public function __construct(
         public readonly string $nombre,
         public readonly string $email,
@@ -13,6 +14,7 @@ class RegisterUserDTO
         public readonly string $rol = 'USUARIO'
     ) {}
 
+    // Método para convertir los datos de la request a un objeto
     public static function fromRequest(array $data): self
     {
         return new self(
@@ -25,6 +27,7 @@ class RegisterUserDTO
         );
     }
 
+    // Método para convertir el objeto a un array
     public function toArray(): array
     {
         return [

@@ -12,6 +12,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
+    // Instancia con atributos
     protected $fillable = [
         'nombre',
         'email',
@@ -33,6 +34,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Relaciones
 
     public function isAdmin(): bool
     {

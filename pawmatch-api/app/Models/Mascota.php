@@ -10,6 +10,8 @@ class Mascota extends Model
 {
     use HasFactory, SoftDeletes;
 
+    //Atributos de la tabla
+
     protected $fillable = [
         'nombre',
         'especie',
@@ -25,6 +27,7 @@ class Mascota extends Model
         'edad_aproximada' => 'integer',
     ];
 
+    // Relaciones
      public function solicitudes()
     {
         return $this->hasMany(SolicitudAdopcion::class);

@@ -11,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 
 class AprobarSolicitudUseCase
 {
+    // Constructor de la clase
     public function __construct(
         private SolicitudRepository $solicitudRepository,
         private HistorialRepository $historialRepository,
@@ -19,6 +20,7 @@ class AprobarSolicitudUseCase
 
     public function execute(int $solicitudId, int $adminId): array
     {
+        // Obtener la solicitud
         $solicitud = $this->solicitudRepository->findById($solicitudId);
 
         if (!$solicitud) {

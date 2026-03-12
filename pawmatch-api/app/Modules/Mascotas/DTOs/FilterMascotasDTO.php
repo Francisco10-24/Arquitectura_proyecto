@@ -12,6 +12,7 @@ class FilterMascotasDTO
         public readonly int $per_page = 15
     ) {}
 
+    // Form request a partir de los datos del DTO
     public static function fromRequest(array $data): self
     {
         return new self(

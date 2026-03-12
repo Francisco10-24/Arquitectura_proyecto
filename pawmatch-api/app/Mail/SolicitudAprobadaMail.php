@@ -14,15 +14,14 @@ class SolicitudAprobadaMail extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
+     * Crear una nueva instancia de solicitud
      */
     public function __construct(
         public SolicitudAdopcion $solicitud
-    )
-    {}
+    ) {}
 
     /**
-     * Get the message envelope.
+     * Mandar el mensaje de solicitud aprobada
      */
     public function envelope(): Envelope
     {
@@ -32,7 +31,7 @@ class SolicitudAprobadaMail extends Mailable
     }
 
     /**
-     * Get the message content definition.
+     * Cargar la vista de correo electrónico
      */
     public function content(): Content
     {
@@ -42,7 +41,7 @@ class SolicitudAprobadaMail extends Mailable
     }
 
     /**
-     * Get the attachments for the message.
+     *
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */

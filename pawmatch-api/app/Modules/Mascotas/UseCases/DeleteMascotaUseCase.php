@@ -13,12 +13,13 @@ class DeleteMascotaUseCase
 
     public function execute(int $id): void
     {
+        // Encontrar la mascota
         $mascota = $this->mascotaRepository->findById($id);
 
         if (!$mascota) {
             throw new ModelNotFoundException('Mascota no encontrada');
         }
-
+        // Eliminar la mascota
         $this->mascotaRepository->delete($mascota);
     }
 }

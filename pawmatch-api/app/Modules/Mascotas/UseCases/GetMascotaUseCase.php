@@ -13,11 +13,14 @@ class GetMascotaUseCase
 
     public function execute(int $id): array
     {
+        // Validar que existe la mascota
         $mascota = $this->mascotaRepository->findById($id);
 
         if (!$mascota) {
             throw new ModelNotFoundException('Mascota no encontrada');
         }
+
+        // Devolver el resultado 
 
         return [
             'id' => $mascota->id,

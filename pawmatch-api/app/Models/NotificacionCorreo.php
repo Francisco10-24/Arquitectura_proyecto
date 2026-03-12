@@ -9,8 +9,11 @@ class NotificacionCorreo extends Model
 {
     use HasFactory;
 
+    //Instancia
+
     protected $table = 'notificaciones_correo';
 
+    // Atributos de la tabla
     protected $fillable = [
         'tipo',
         'destinatario_email',
@@ -23,7 +26,7 @@ class NotificacionCorreo extends Model
     protected $casts = [
         'fecha_envio' => 'datetime',
     ];
-
+    // Relaciones
     public function solicitud()
     {
         return $this->belongsTo(SolicitudAdopcion::class, 'solicitud_id');

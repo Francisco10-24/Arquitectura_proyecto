@@ -9,10 +9,12 @@ class HistorialEstadoSolicitud extends Model
 {
     use HasFactory;
 
+    //Instancia 
     protected $table = 'historial_estado_solicitud';
 
-    public $timestamps = false; // Esta tabla solo tiene fecha_cambio
+    public $timestamps = false; 
 
+    // Atributos de la tabla
     protected $fillable = [
         'solicitud_id',
         'estado_anterior',

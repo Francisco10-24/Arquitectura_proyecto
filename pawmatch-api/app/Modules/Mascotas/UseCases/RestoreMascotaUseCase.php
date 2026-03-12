@@ -13,12 +13,14 @@ class RestoreMascotaUseCase
 
     public function execute(int $id): array
     {
+        // Buscar la mascota que esta eliminada
         $mascota = $this->mascotaRepository->restore($id);
 
         if (!$mascota) {
             throw new ModelNotFoundException('Mascota eliminada no encontrada');
         }
 
+        // Restaurar 
         return [
             'id' => $mascota->id,
             'nombre' => $mascota->nombre,

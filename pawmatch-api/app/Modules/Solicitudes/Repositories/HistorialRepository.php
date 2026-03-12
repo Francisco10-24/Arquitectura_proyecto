@@ -6,6 +6,7 @@ use App\Models\HistorialEstadoSolicitud;
 
 class HistorialRepository
 {
+    // Crear un historial de cambios de estado de una solicitud
     public function registrarCambio(
         int $solicitudId,
         ?string $estadoAnterior,
@@ -22,7 +23,7 @@ class HistorialRepository
             'fecha_cambio' => now(),
         ]);
     }
-
+    // Obtener los datos del historial de cambios de estado de una solicitud
     public function obtenerHistorial(int $solicitudId): array
     {
         return HistorialEstadoSolicitud::with('usuario:id,nombre,email')

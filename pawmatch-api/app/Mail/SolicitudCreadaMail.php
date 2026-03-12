@@ -14,7 +14,7 @@ class SolicitudCreadaMail extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
+     * Crear instancia de solicitud
      */
     public function __construct(
         public SolicitudAdopcion $solicitud
@@ -22,7 +22,7 @@ class SolicitudCreadaMail extends Mailable
     {} 
 
     /**
-     * Get the message envelope.
+     * Obtener el mensaje de envío
      */
     public function envelope(): Envelope
     {
@@ -32,7 +32,7 @@ class SolicitudCreadaMail extends Mailable
     }
 
     /**
-     * Get the message content definition.
+     * Cargar la vista de correo electrónico
      */
     public function content(): Content
     {
@@ -42,7 +42,7 @@ class SolicitudCreadaMail extends Mailable
     }
 
     /**
-     * Get the attachments for the message.
+     * 
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */

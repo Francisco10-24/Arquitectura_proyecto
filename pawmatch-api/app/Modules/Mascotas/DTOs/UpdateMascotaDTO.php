@@ -15,6 +15,8 @@ class UpdateMascotaDTO
         public readonly ?string $estado = null
     ) {}
 
+    // Form request a partir de los datos del DTO
+
     public static function fromRequest(array $data): self
     {
         return new self(
@@ -28,6 +30,8 @@ class UpdateMascotaDTO
             estado: $data['estado'] ?? null
         );
     }
+
+    // Array a partir de los datos del DTO
 
     public function toArray(): array
     {

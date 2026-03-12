@@ -10,6 +10,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class MascotaRepository
 {
+    // Métodos para la base de datos
     public function create(CreateMascotaDTO $dto): Mascota
     {
         return Mascota::create($dto->toArray());
@@ -66,6 +67,7 @@ class MascotaRepository
             ->paginate($filters->per_page);
     }
 
+    // Métodos para administradores
     public function getAllForAdmin(): LengthAwarePaginator
     {
         return Mascota::orderBy('created_at', 'desc')->paginate(15);

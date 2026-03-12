@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 
 class LoginUserUseCase
 {
+    // Instancia de la clase del repositorio
     public function __construct(
         private UserRepository $userRepository
     ) {}
@@ -31,6 +32,7 @@ class LoginUserUseCase
         // Generar nuevo token
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        // Devolver datos del usuario y el token
         return [
             'user' => [
                 'id' => $user->id,
