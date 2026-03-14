@@ -118,10 +118,10 @@ class MascotaController extends Controller
                 'estado' => 'nullable|in:DISPONIBLE,EN_PROCESO,ADOPTADA,INACTIVA',
             ]);
 
-            // ✅ Guardar solo el path, no la URL completa
+            //Guardar solo el path, no la URL completa
             if ($request->hasFile('foto')) {
                 $path = $request->file('foto')->store('mascotas', 'public');
-                $validated['foto'] = $path;  // 👈 Cambiar foto_url a foto
+                $validated['foto'] = $path; 
             }
 
             $dto = CreateMascotaDTO::fromRequest($validated);
@@ -167,7 +167,7 @@ class MascotaController extends Controller
                 'estado' => 'sometimes|in:DISPONIBLE,EN_PROCESO,ADOPTADA,INACTIVA',
             ]);
 
-            // ✅ Manejar actualización de foto
+            // Manejar actualización de foto
             if ($request->hasFile('foto')) {
                 // Eliminar foto anterior si existe
                 if ($mascota->foto) {
@@ -176,7 +176,7 @@ class MascotaController extends Controller
 
                 // Guardar nueva foto
                 $path = $request->file('foto')->store('mascotas', 'public');
-                $validated['foto'] = $path;  // 👈 Cambiar foto_url a foto
+                $validated['foto'] = $path; 
             }
 
             $dto = UpdateMascotaDTO::fromRequest($validated);
