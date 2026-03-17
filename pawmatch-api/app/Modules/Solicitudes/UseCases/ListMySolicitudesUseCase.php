@@ -17,21 +17,21 @@ class ListMySolicitudesUseCase
 
         // Retornar datos
         $data = $solicitudes->map(function($solicitud) {
-            return [
-                'id' => $solicitud->id,
-                'estado' => $solicitud->estado,
-                'comentarios_adoptante' => $solicitud->comentarios_adoptante,
-                'motivo_rechazo' => $solicitud->motivo_rechazo,
-                'mascota' => [
-                    'id' => $solicitud->mascota->id,
-                    'nombre' => $solicitud->mascota->nombre,
-                    'especie' => $solicitud->mascota->especie,
-                    'foto_url' => $solicitud->mascota->foto_url,
-                ],
-                'created_at' => $solicitud->created_at->toISOString(),
-                'updated_at' => $solicitud->updated_at->toISOString(),
-            ];
-        });
+    return [
+        'id' => $solicitud->id,
+        'estado' => $solicitud->estado,
+        'comentarios_adoptante' => $solicitud->comentarios_adoptante,
+        'motivo_rechazo' => $solicitud->motivo_rechazo,
+        'mascota' => $solicitud->mascota ? [   // ✅ null-check aquí
+            'id' => $solicitud->mascota->id,
+            'nombre' => $solicitud->mascota->nombre,
+            'especie' => $solicitud->mascota->especie,
+            'foto_url' => $solicitud->mascota->foto_url,
+        ] : null,
+        'created_at' => $solicitud->created_at->toISOString(),
+        'updated_at' => $solicitud->updated_at->toISOString(),
+    ];
+    });
 
         return [
             'data' => $data,

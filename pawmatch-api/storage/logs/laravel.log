@@ -3202,3 +3202,5 @@ Did you mean one of these?
 [2026-03-17 05:46:24] local.INFO: Email enviado: Solicitud rechazada {"solicitud_id":4,"destinatario":"fraauda004@gmail.com"} 
 [2026-03-17 06:17:37] local.INFO: Email enviado: Solicitud creada {"solicitud_id":5,"destinatario":"fraauda004@gmail.com"} 
 [2026-03-17 06:40:21] local.INFO: Email enviado: Solicitud rechazada {"solicitud_id":5,"destinatario":"fraauda004@gmail.com"} 
+[2026-03-17 15:57:27] local.ERROR: Error al enviar email: Solicitud creada {"solicitud_id":6,"error":"Connection to \"sandbox.smtp.mailtrap.io:2525\" has been closed unexpectedly."} 
+[2026-03-17 15:59:28] local.ERROR: Error al enviar email: Solicitud aprobada {"solicitud_id":6,"error":"Connection to \"sandbox.smtp.mailtrap.io:2525\" has been closed unexpectedly."} 
